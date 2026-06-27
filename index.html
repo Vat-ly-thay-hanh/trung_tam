@@ -338,13 +338,6 @@ const swiper = new Swiper(".teacherSwiper",{
 
 function selectTeacher(name){
 
-    const token = crypto.randomUUID();
-
-    sessionStorage.setItem(
-        "teacherToken",
-        token
-    );
-
     let folder = "";
 
     switch(name){
@@ -378,8 +371,13 @@ function selectTeacher(name){
             break;
     }
 
-    location.href =
-        folder + "/?t=" + token;
+    // Ghi nhận giáo viên được chọn
+    sessionStorage.setItem(
+        "selectedTeacher",
+        folder
+    );
+
+    location.href = folder + "/";
 }
 
 </script>
