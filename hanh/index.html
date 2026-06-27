@@ -7,6 +7,35 @@
 
     <link rel="stylesheet" href="style.css">
 </head>
+
+<script>
+
+const urlToken =
+    new URLSearchParams(
+        location.search
+    ).get("t");
+
+const sessionToken =
+    sessionStorage.getItem(
+        "teacherToken"
+    );
+
+if(urlToken !== sessionToken){
+
+    location.replace("../");
+
+}
+
+window.history.replaceState(
+    {},
+    document.title,
+    location.pathname
+);
+
+sessionStorage.removeItem("teacherToken");
+
+</script>
+
 <body>
 
 <div class="container">
