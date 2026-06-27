@@ -108,14 +108,18 @@ async function loadClassStatus() {
         // Hiện số chỗ còn lại khi <= 20
 
         remain10A.innerHTML =
-            remainA <= 20
-            ? `Còn ${remainA} chỗ`
-            : "";
+            remainA <= 0
+                ? '<span class="full-group">Nhóm đã đầy</span>'
+                : remainA <= 20
+                    ? `Còn ${remainA} chỗ`
+                    : "";
 
         remain10B.innerHTML =
-            remainB <= 20
-            ? `Còn ${remainB} chỗ`
-            : "";
+            remainB <= 0
+                ? '<span class="full-group">Nhóm đã đầy</span>'
+                : remainB <= 20
+                    ? `Còn ${remainB} chỗ`
+                    : "";
 
         // Khóa nhóm đầy
 

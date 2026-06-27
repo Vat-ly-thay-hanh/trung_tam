@@ -20,6 +20,10 @@ body{
     margin:30px 0;
 }
 
+.full-group{
+    color:#dc2626;
+    font-weight:700;
+}
 
 .container{
     max-width:900px;
