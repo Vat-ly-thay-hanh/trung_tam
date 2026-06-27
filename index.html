@@ -283,7 +283,7 @@ header p{
         Trung tâm tổ chức các lớp học Toán, Vật Lý và Hóa Học
         từ THCS đến THPT. Chương trình học bao gồm ôn tập,
         củng cố kiến thức, bồi dưỡng học sinh giỏi, luyện thi
-        vào lớp 10, luyện thi THPT Quốc gia và ôn thi Đại học.
+        vào lớp 10, luyện thi THPT Quốc gia.
     </p>
 
     <br>
@@ -338,11 +338,48 @@ const swiper = new Swiper(".teacherSwiper",{
 
 function selectTeacher(name){
 
-    alert(
-        "Bạn đã chọn giáo viên:\n\n" + name +
-        "\n\n(Sau này sẽ chuyển sang trang tuyển sinh)"
+    const token = crypto.randomUUID();
+
+    sessionStorage.setItem(
+        "teacherToken",
+        token
     );
 
+    let folder = "";
+
+    switch(name){
+
+        case "Từ Văn Khanh":
+            folder = "khanh";
+            break;
+
+        case "Đỗ Xuân Hạnh":
+            folder = "hanh";
+            break;
+
+        case "Nguyễn Văn Vũ":
+            folder = "vu";
+            break;
+
+        case "Trương Thạch Hoàng":
+            folder = "hoang";
+            break;
+
+        case "Đào Thị Ngọc Hân":
+            folder = "han";
+            break;
+
+        case "Lê Mai Phương":
+            folder = "phuong";
+            break;
+
+        case "Vũ Hữu Tú":
+            folder = "tu";
+            break;
+    }
+
+    location.href =
+        folder + "/?t=" + token;
 }
 
 </script>
