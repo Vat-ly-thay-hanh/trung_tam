@@ -1,387 +1,217 @@
 <!DOCTYPE html>
+
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký học toán thầy Khanh</title>
 
-<title>TRUNG TÂM LUYỆN THI ĐẠI HỌC HUY HOÀNG</title>
+<link rel="stylesheet" href="style.css">
 
-<link rel="stylesheet"
-href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    font-family:Arial, Helvetica, sans-serif;
-    background:#f3f6fb;
-    color:#333;
-    overflow-x:hidden;
-}
-
-header{
-    background:#003366;
-    color:white;
-    text-align:center;
-    padding:30px 15px;
-}
-
-header h1{
-    font-size:clamp(24px,5vw,42px);
-    margin-bottom:10px;
-}
-
-header p{
-    opacity:0.9;
-}
-
-.guide{
-    text-align:center;
-    margin-top:25px;
-    font-size:20px;
-    font-weight:bold;
-    color:#003366;
-}
-
-.teacherSwiper{
-    width:100%;
-    padding-top:40px;
-    padding-bottom:60px;
-}
-
-.swiper-slide{
-    width:280px;
-    text-align:center;
-    cursor:pointer;
-}
-
-.swiper-slide img{
-    width:100%;
-    height:420px;
-    object-fit:cover;
-
-    border-radius:20px;
-
-    box-shadow:
-        0 15px 40px rgba(0,0,0,.25);
-
-    transition:all .3s ease;
-}
-
-.swiper-slide-active img{
-    transform:scale(1.08);
-    border:3px solid #003366;
-}
-
-.teacher-name{
-    margin-top:15px;
-    font-size:24px;
-    font-weight:bold;
-    color:#003366;
-}
-
-.teacher-subject{
-    margin-top:8px;
-    color:#666;
-}
-
-.description{
-    width:min(1000px,92%);
-    margin:0 auto 50px auto;
-
-    background:white;
-
-    border-radius:20px;
-
-    padding:30px;
-
-    box-shadow:
-        0 5px 20px rgba(0,0,0,.1);
-}
-
-.description h2{
-    text-align:center;
-    color:#003366;
-    margin-bottom:20px;
-}
-
-.description p{
-    line-height:1.8;
-    text-align:justify;
-}
-
-.swiper-button-next,
-.swiper-button-prev{
-    color:#003366;
-}
-
-.swiper-pagination-bullet-active{
-    background:#003366;
-}
-
-@media(max-width:768px){
-
-    .swiper-slide{
-        width:240px;
+<script>
+    if (
+        sessionStorage.getItem("selectedTeacher")
+        !== "khanh"
+    ){
+        location.replace("../");
     }
+</script>
 
-    .swiper-slide img{
-        height:340px;
-    }
-
-    .teacher-name{
-        font-size:20px;
-    }
-
-    .guide{
-        font-size:18px;
-        padding:0 10px;
-    }
-}
-
-</style>
 </head>
 
 <body>
 
-<header>
-    <h1>TRUNG TÂM LUYỆN THI ĐẠI HỌC HUY HOÀNG</h1>
+<div class="container">
 
-    <p>
-        Đồng hành cùng học sinh trên con đường chinh phục tri thức
-    </p>
-</header>
+<div class="header">
 
-<div class="guide">
-    👉 BẤM VÀO HÌNH ĐỂ CHỌN GIÁO VIÊN MUỐN THEO HỌC
+    <img
+        src="images/logo.png"
+        alt="Logo"
+        class="logo">
+
+    <h1>TOÁN THẦY KHANH</h1>
+
+    <div class="phone">
+        0967005293
+    </div>
+
 </div>
 
-<div class="swiper teacherSwiper">
+<div class="card">
 
-    <div class="swiper-wrapper">
+    <div class="form-group">
 
-        <div class="swiper-slide"
-             onclick="selectTeacher('Từ Văn Khanh')">
+        <label>
+            <strong>Chọn lớp *</strong>
+        </label>
 
-            <img src="teacher_img/khanh.jpg">
+        <select id="lopHoc">
+            <option value="">
+                -- Chọn lớp --
+            </option>
 
-            <div class="teacher-name">
-                Từ Văn Khanh
-            </div>
+            <option value="8">
+                Lớp 8
+            </option>
 
-            <div class="teacher-subject">
-                Toán 8, Toán 9, Toán 10, Toán 11, Toán 12, ôn chuyên và THPT Quốc gia
-            </div>
+            <option value="9">
+                Lớp 9
+            </option>
 
-        </div>
+            <option value="10">
+                Lớp 10
+            </option>
 
-        <div class="swiper-slide"
-             onclick="selectTeacher('Đỗ Xuân Hạnh')">
+            <option value="11">
+                Lớp 11
+            </option>
 
-            <img src="teacher_img/hanh.jpg">
+            <option value="12">
+                Lớp 12
+            </option>
+        </select>
 
-            <div class="teacher-name">
-                Đỗ Xuân Hạnh
-            </div>
+    </div>
 
-            <div class="teacher-subject">
-                Lý 9, Lý 10, Lý 11, Lý 12, ôn chuyên và THPT Quốc Gia
-            </div>
+    <div
+        id="fullMessage"
+        class="error"
+        style="display:none;">
+    </div>
 
-        </div>
+    <div
+        id="formSection"
+        style="display:none;">
 
-        <div class="swiper-slide"
-             onclick="selectTeacher('Nguyễn Văn Vũ')">
+        <div class="form-group">
 
-            <img src="teacher_img/vu.jpg">
+            <label>
+                <strong>Họ và tên *</strong>
+            </label>
 
-            <div class="teacher-name">
-                Nguyễn Văn Vũ
-            </div>
-
-            <div class="teacher-subject">
-                Toán 8, Toán 9, Toán 10, Toán 11, Toán 12, ôn chuyên và THPT Quốc gia
-            </div>
-        </div>
-
-        <div class="swiper-slide"
-             onclick="selectTeacher('Trương Thạch Hoàng')">
-
-            <img src="teacher_img/hoang.jpg">
-
-            <div class="teacher-name">
-                Trương Thạch Hoàng
-            </div>
-
-            <div class="teacher-subject">
-                Hóa 8, Hóa 9, Hóa 10, Hóa 11, Hóa 12, ôn chuyên và THPT Quốc gia
-            </div>
-        </div>
-
-        <div class="swiper-slide"
-             onclick="selectTeacher('Đào Thị Ngọc Hân')">
-
-            <img src="teacher_img/han.jpg">
-
-            <div class="teacher-name">
-                Đào Thị Ngọc Hân
-            </div>
-
-            <div class="teacher-subject">
-                Hóa 9, Hóa 10, Hóa 11, Hóa 12, ôn chuyên và THPT Quốc gia
-            </div>
+            <input
+                type="text"
+                id="hoTen"
+                placeholder="Nhập họ và tên học sinh">
 
         </div>
 
-        <div class="swiper-slide"
-             onclick="selectTeacher('Lê Mai Phương')">
+        <div class="form-group">
 
-            <img src="teacher_img/phuong.jpg">
+            <label>
+                <strong>Số điện thoại phụ huynh *</strong>
+            </label>
 
-            <div class="teacher-name">
-                Lê Mai Phương
-            </div>
-
-            <div class="teacher-subject">
-                Toán 6, Toán 7, Toán 8, Toán 9
-            </div>
+            <input
+                type="text"
+                id="sdtPhuHuynh"
+                placeholder="Ví dụ: 0123456789">
 
         </div>
 
-        <div class="swiper-slide"
-             onclick="selectTeacher('Vũ Hữu Tú')">
+        <div
+            class="form-group"
+            id="lienHeHocSinhGroup">
 
-            <img src="teacher_img/tu.jpg">
+            <label>
+                <strong>Số điện thoại học sinh *</strong>
+            </label>
 
-            <div class="teacher-name">
-                Vũ Hữu Tú
+            <input
+                type="text"
+                id="lienHeHocSinh"
+                placeholder="Ví dụ: 0123456789">
+
+        </div>
+
+        <div class="form-group">
+
+            <label>
+                <strong>Trường học sinh đang học *</strong>
+            </label>
+
+            <select id="truongHoc">
+            </select>
+
+        </div>
+
+        <div class="schedule-box">
+
+            <h2>Lịch học lớp 10</h2>
+
+            <img
+                id="scheduleImage"
+                src=""
+                alt="Lịch học">
+
+        </div>
+
+        <div
+            id="groupSection"
+            style="display:none;">
+
+            <h2>Chọn nhóm học</h2>
+
+            <div class="class-selection">
+
+                <label class="class-card">
+
+                    <div class="class-info">
+
+                        <div class="class-title">
+                            Lớp 10A
+                        </div>
+
+                    </div>
+
+                    <input
+                        type="radio"
+                        name="nhomHoc"
+                        value="10A">
+
+                </label>
+
+                <label class="class-card">
+
+                    <div class="class-info">
+
+                        <div class="class-title">
+                            Lớp 10B
+                        </div>
+
+                    </div>
+
+                    <input
+                        type="radio"
+                        name="nhomHoc"
+                        value="10B">
+
+                </label>
+
             </div>
-
-            <div class="teacher-subject">
-                Hóa 9, Hóa 10, Hóa 11, Hóa 12, ôn chuyên và THPT Quốc gia
-            </div>
+            
 
         </div>
 
     </div>
 
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-pagination"></div>
+    <button
+        id="submitBtn"
+        disabled>
+
+        Đăng ký
+
+    </button>
+
+    <div id="message">
+    </div>
 
 </div>
 
-<div class="description">
-
-    <h2>THÔNG TIN LỚP HỌC</h2>
-
-    <p>
-        Trung tâm tổ chức các lớp học Toán, Vật Lý và Hóa Học
-        từ THCS đến THPT. Chương trình học bao gồm ôn tập,
-        củng cố kiến thức, bồi dưỡng học sinh giỏi, luyện thi
-        vào lớp 10, luyện thi THPT Quốc gia.
-    </p>
-
-    <br>
-
-    <p>
-        Học sinh và phụ huynh vui lòng chọn giáo viên phía trên
-        để xem thông tin chi tiết và đăng ký lớp học.
-    </p>
-
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-<script>
-
-const swiper = new Swiper(".teacherSwiper",{
-
-    initialSlide:0,
-
-    loop:false,
-
-    effect:"coverflow",
-
-    grabCursor:true,
-
-    centeredSlides:true,
-
-    slidesPerView:"auto",
-
-    keyboard:{
-        enabled:true
-    },
-
-    coverflowEffect:{
-        rotate:35,
-        stretch:0,
-        depth:180,
-        modifier:1,
-        slideShadows:true
-    },
-
-    pagination:{
-        el:".swiper-pagination"
-    },
-
-    navigation:{
-        nextEl:".swiper-button-next",
-        prevEl:".swiper-button-prev"
-    }
-
-});
-
-function selectTeacher(name){
-
-    let folder = "";
-
-    switch(name){
-
-        case "Từ Văn Khanh":
-            folder = "khanh";
-            break;
-
-        case "Đỗ Xuân Hạnh":
-            folder = "hanh";
-            break;
-
-        case "Nguyễn Văn Vũ":
-            folder = "vu";
-            break;
-
-        case "Trương Thạch Hoàng":
-            folder = "hoang";
-            break;
-
-        case "Đào Thị Ngọc Hân":
-            folder = "han";
-            break;
-
-        case "Lê Mai Phương":
-            folder = "phuong";
-            break;
-
-        case "Vũ Hữu Tú":
-            folder = "tu";
-            break;
-    }
-
-    // Ghi nhận giáo viên được chọn
-    sessionStorage.setItem(
-        "selectedTeacher",
-        folder
-    );
-
-    location.href = folder + "/";
-}
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
