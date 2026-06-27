@@ -34,6 +34,18 @@ document.getElementById("scheduleImage");
 const groupSection =
 document.getElementById("groupSection");
 
+const group10A =
+document.getElementById("group10A");
+
+const group10B =
+document.getElementById("group10B");
+
+const remain10A =
+document.getElementById("remain10A");
+
+const remain10B =
+document.getElementById("remain10B");
+
 const THPT = [
 "THPT chuyên Hùng Vương",
 "THPT Phan Bội Châu",
@@ -69,7 +81,89 @@ truongHoc.addEventListener(
 validateForm
 );
 
-function buildForm() {
+async function loadClassStatus() {
+
+    try {
+
+        const response =
+            await fetch(
+                WEB_APP_URL
+            );
+
+        const result =
+            await response.json();
+
+        const count10A =
+            Number(result.count10A || 0);
+
+        const count10B =
+            Number(result.count10B || 0);
+
+        const remainA =
+            100 - count10A;
+
+        const remainB =
+            100 - count10B;
+
+        // Hiện số chỗ còn lại khi <= 20
+
+        remain10A.innerHTML =
+            remainA <= 20
+            ? `Còn ${remainA} chỗ`
+            : "";
+
+        remain10B.innerHTML =
+            remainB <= 20
+            ? `Còn ${remainB} chỗ`
+            : "";
+
+        // Khóa nhóm đầy
+
+        group10A.disabled =
+            remainA <= 0;
+
+        group10B.disabled =
+            remainB <= 0;
+
+        // Nếu đầy thì bỏ chọn
+
+        if (group10A.disabled)
+            group10A.checked = false;
+
+        if (group10B.disabled)
+            group10B.checked = false;
+
+        // Nếu cả hai nhóm đều đầy
+
+        if (
+            remainA <= 0 &&
+            remainB <= 0
+        ) {
+
+            formSection.style.display =
+                "none";
+
+            fullMessage.style.display =
+                "block";
+
+            fullMessage.innerHTML =
+                "Lớp đã đầy.";
+
+            return false;
+        }
+
+        return true;
+
+    }
+    catch(err){
+
+        console.error(err);
+
+        return true;
+    }
+}
+
+async function buildForm() {
 
 const lop = lopHoc.value;
 
@@ -106,6 +200,12 @@ if (
 
     return;
 }
+
+const available =
+    await loadClassStatus();
+
+if (!available)
+    return;
 
 formSection.style.display =
     "block";
