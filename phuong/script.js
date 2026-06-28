@@ -81,7 +81,7 @@ function buildForm() {
     loadSchools(THCS);
 
     scheduleImage.src =
-        `images/lich${lop}.jpg`;
+        `images/lop${lop}.jpg`;
 
     validateForm();
 }
