@@ -1,5 +1,5 @@
 const WEB_APP_URL =
-    "https://mute-credit-dac6.hanhborn.workers.dev/";
+    "https://raspy-feather-b1e9.hanhborn.workers.dev/";
 
 const lopHoc =
     document.getElementById("lopHoc");
