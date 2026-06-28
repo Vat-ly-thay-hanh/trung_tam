@@ -1,5 +1,5 @@
 const WEB_APP_URL =
-"https://snowy-waterfall-9300.hanhborn.workers.dev/";
+"https://round-wood-a485.hanhborn.workers.dev/";
 
 const lopHoc =
 document.getElementById("lopHoc");
@@ -7,17 +7,17 @@ document.getElementById("lopHoc");
 const formSection =
 document.getElementById("formSection");
 
-const fullMessage =
-document.getElementById("fullMessage");
-
 const hoTen =
 document.getElementById("hoTen");
 
-const sdtPhuHuynh =
-document.getElementById("sdtPhuHuynh");
-
 const lienHeHocSinh =
 document.getElementById("lienHeHocSinh");
+
+const studentPhoneGroup =
+document.getElementById("studentPhoneGroup");
+
+const sdtPhuHuynh =
+document.getElementById("sdtPhuHuynh");
 
 const truongHoc =
 document.getElementById("truongHoc");
@@ -31,22 +31,17 @@ document.getElementById("message");
 const scheduleImage =
 document.getElementById("scheduleImage");
 
-const groupSection =
-document.getElementById("groupSection");
-
-const group10A =
-document.getElementById("group10A");
-
-const group10B =
-document.getElementById("group10B");
-
-const remain10A =
-document.getElementById("remain10A");
-
-const remain10B =
-document.getElementById("remain10B");
-
-const THPT = [
+const THCS_THPT = [
+"THCS Nguyễn Du",
+"THCS Nguyễn Huệ",
+"THCS Trần Phú",
+"THCS Lý Tự Trọng",
+"THCS Trưng Vương",
+"THCS Tôn Đức Thắng",
+"THCS Nguyễn Viết Xuân",
+"THCS Nguyễn Văn Cừ",
+"THCS Phạm Hồng Thái",
+"THCS Quang Trung",
 "THPT chuyên Hùng Vương",
 "THPT Phan Bội Châu",
 "THPT Pleiku",
@@ -66,12 +61,12 @@ hoTen.addEventListener(
 validateForm
 );
 
-sdtPhuHuynh.addEventListener(
+lienHeHocSinh.addEventListener(
 "input",
 validateForm
 );
 
-lienHeHocSinh.addEventListener(
+sdtPhuHuynh.addEventListener(
 "input",
 validateForm
 );
@@ -81,166 +76,52 @@ truongHoc.addEventListener(
 validateForm
 );
 
-async function loadClassStatus() {
-
-    try {
-
-        const response =
-            await fetch(
-                WEB_APP_URL
-            );
-
-        const result =
-            await response.json();
-
-        const count10A =
-            Number(result.count10A || 0);
-
-        const count10B =
-            Number(result.count10B || 0);
-
-        const remainA =
-            100 - count10A;
-
-        const remainB =
-            100 - count10B;
-
-        // Hiện số chỗ còn lại khi <= 20
-
-        remain10A.innerHTML =
-            remainA <= 0
-                ? '<span class="full-group">Nhóm đã đầy</span>'
-                : remainA <= 20
-                    ? `Còn ${remainA} chỗ`
-                    : "";
-
-        remain10B.innerHTML =
-            remainB <= 0
-                ? '<span class="full-group">Nhóm đã đầy</span>'
-                : remainB <= 20
-                    ? `Còn ${remainB} chỗ`
-                    : "";
-
-        // Khóa nhóm đầy
-
-        group10A.disabled =
-            remainA <= 0;
-
-        group10B.disabled =
-            remainB <= 0;
-
-        // Nếu đầy thì bỏ chọn
-
-        if (group10A.disabled)
-            group10A.checked = false;
-
-        if (group10B.disabled)
-            group10B.checked = false;
-
-        // Nếu cả hai nhóm đều đầy
-
-        if (
-            remainA <= 0 &&
-            remainB <= 0
-        ) {
-
-            formSection.style.display =
-                "none";
-
-            fullMessage.style.display =
-                "block";
-
-            fullMessage.innerHTML =
-                "Lớp đã đầy.";
-
-            return false;
-        }
-
-        return true;
-
-    }
-    catch(err){
-
-        console.error(err);
-
-        return true;
-    }
-}
-
-async function buildForm() {
+function buildForm() {
 
 const lop = lopHoc.value;
 
-fullMessage.style.display =
-    "none";
+if (!lop) {
 
-fullMessage.innerHTML = "";
+    formSection.style.display =
+        "none";
 
-formSection.style.display =
-    "none";
-
-groupSection.style.display =
-    "none";
-
-submitBtn.disabled = true;
-
-message.innerHTML = "";
-
-if (!lop)
-    return;
-
-if (
-    lop === "8" ||
-    lop === "9" ||
-    lop === "11" ||
-    lop === "12"
-) {
-
-    fullMessage.style.display =
-        "block";
-
-    fullMessage.innerHTML =
-        "Lớp đã đầy.";
+    submitBtn.disabled = true;
 
     return;
 }
 
-const available =
-    await loadClassStatus();
-
-if (!available)
-    return;
-
 formSection.style.display =
     "block";
 
-groupSection.style.display =
-    "block";
+message.innerHTML = "";
 
-loadSchools(THPT);
+loadSchools(
+    THCS_THPT
+);
 
 scheduleImage.src =
-    "images/lich10.jpg";
+    `images/lop${lop}.jpg`;
 
-document
-    .querySelectorAll(
-        'input[name="nhomHoc"]'
-    )
-    .forEach(radio => {
+if (lop === "9") {
 
-        radio.checked = false;
+    studentPhoneGroup.style.display =
+        "none";
 
-        radio.addEventListener(
-            "change",
-            validateForm
-        );
-    });
+    lienHeHocSinh.value = "";
+}
+else {
+
+    studentPhoneGroup.style.display =
+        "block";
+}
 
 validateForm();
+
 
 }
 
 function loadSchools(list) {
+
 
 truongHoc.innerHTML =
     '<option value="">-- Chọn trường --</option>';
@@ -248,21 +129,19 @@ truongHoc.innerHTML =
 list.forEach(item => {
 
     const option =
-        document.createElement(
-            "option"
-        );
+        document.createElement("option");
 
     option.value = item;
     option.textContent = item;
 
-    truongHoc.appendChild(
-        option
-    );
+    truongHoc.appendChild(option);
 });
+
 
 }
 
 function validName() {
+
 
 const words =
     hoTen.value
@@ -272,50 +151,53 @@ const words =
 
 return words.length >= 2;
 
+
 }
 
-function validPhone(phone) {
+function validParentPhone() {
 
 return /^0\d{9}$|^0\d{10}$/.test(
-    phone.trim()
+    sdtPhuHuynh.value.trim()
 );
+
+
+}
+
+function validStudentPhone() {
+
+
+return /^0\d{9}$|^0\d{10}$/.test(
+    lienHeHocSinh.value.trim()
+);
+
 
 }
 
 function validateForm() {
 
+
 let ok = true;
 
-if (lopHoc.value !== "10")
+if (!lopHoc.value)
     ok = false;
 
 if (!validName())
     ok = false;
 
-if (
-    !validPhone(
-        sdtPhuHuynh.value
-    )
-)
-    ok = false;
-
-if (
-    !validPhone(
-        lienHeHocSinh.value
-    )
-)
+if (!validParentPhone())
     ok = false;
 
 if (!truongHoc.value)
     ok = false;
 
-const nhomHoc =
-    document.querySelector(
-        'input[name="nhomHoc"]:checked'
-    );
-
-if (!nhomHoc)
-    ok = false;
+if (
+    ["10", "11", "12"].includes(
+        lopHoc.value
+    )
+) {
+    if (!validStudentPhone())
+        ok = false;
+}
 
 submitBtn.disabled = !ok;
 
@@ -336,31 +218,22 @@ message.className =
 message.innerHTML =
     "Đang gửi đăng ký...";
 
-const nhomHoc =
-    document.querySelector(
-        'input[name="nhomHoc"]:checked'
-    );
-
 const data = {
 
-    lop: lopHoc.value,
+    lop:
+        lopHoc.value,
 
     hoTen:
         hoTen.value.trim(),
 
-    sdtPhuHuynh:
-        sdtPhuHuynh.value.trim(),
-
     lienHeHocSinh:
         lienHeHocSinh.value.trim(),
 
-    truongHoc:
-        truongHoc.value,
+    sdtPhuHuynh:
+        sdtPhuHuynh.value.trim(),
 
-    nhomHoc:
-        nhomHoc
-            ? nhomHoc.value
-            : ""
+    truongHoc:
+        truongHoc.value
 };
 
 try {
@@ -376,9 +249,8 @@ try {
                         "application/json"
                 },
 
-                body: JSON.stringify(
-                    data
-                )
+                body:
+                    JSON.stringify(data)
             }
         );
 
@@ -390,31 +262,29 @@ try {
         document.querySelector(
             ".card"
         ).innerHTML = `
-        <div style="
-            text-align:center;
-            padding:40px 20px;
-        ">
-            <h2 style="
-                color:#0f4c81;
-                margin-bottom:25px;
+            <div style="
+                text-align:center;
+                padding:40px 20px;
             ">
-                Đã đăng ký thành công!
-            </h2>
+                <h2 style="
+                    color:#0f4c81;
+                    margin-bottom:25px;
+                ">
+                    Đăng ký thành công!
+                </h2>
 
-            <p style="
-                font-size:20px;
-                line-height:1.8;
-                color:#0f4c81;
-            ">
-                Hãy nhắn tin cho thầy Khanh qua
-                <br><br>
-                <b>FB: Từ Văn Khanh</b>
-                <br><br>
-                hoặc Zalo:
-                <br>
-                <b>0967005293</b>
-            </p>
-        </div>
+                <p style="
+                    font-size:20px;
+                    line-height:1.8;
+                    color:#0f4c81;
+                ">
+                    Hãy nhắn tin cho cô Hân thông qua
+                    <b>FB: Từ Nhật Hà Linh</b>
+                    <br><br>
+                    hoặc zalo:
+                    <b>0392365563</b>
+                </p>
+            </div>
         `;
     }
     else {
