@@ -70,6 +70,17 @@ function buildForm() {
     groupTableContainer.innerHTML = "";
     groupSection.style.display = "none";
 
+    if (lop === "8") {
+
+        lienHeHocSinh.value = "";
+
+        lienHeHocSinhGroup.style.display = "none";
+
+        loadSchools(THCS);
+
+        scheduleImage.src = "images/lop8.jpg";
+    }
+
     if (lop === "9") {
 
         lienHeHocSinh.value = "";
@@ -225,7 +236,7 @@ function validateForm() {
     if (!truongHoc.value)
         ok = false;
 
-    if (lopHoc.value !== "9") {
+    if (lopHoc.value !== "9" && lopHoc.value !== "8") {
 
         if (
             lienHeHocSinh.value.trim() === ""
@@ -279,7 +290,8 @@ async function submitForm() {
             sdtPhuHuynh.value.trim(),
 
         lienHeHocSinh:
-            lopHoc.value === "9"
+            (lopHoc.value === "9" ||
+            lopHoc.value === "8")
                 ? ""
                 : lienHeHocSinh.value.trim(),
 
