@@ -1,21 +1,33 @@
 <!DOCTYPE html>
-
 <html lang="vi">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng ký học hóa thầy Tú</title>
 
-<link rel="stylesheet" href="style.css">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-<script>
-    if (
-        sessionStorage.getItem("selectedTeacher")
-        !== "tu"
-    ){
-        location.replace("../");
-    }
-</script>
+    <title>
+        Đăng ký học Hóa thầy Tú
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css">
+
+    <script>
+
+        if (
+            sessionStorage.getItem(
+                "selectedTeacher"
+            ) !== "tu"
+        ) {
+            location.replace("../");
+        }
+
+    </script>
 
 </head>
 
@@ -23,21 +35,176 @@
 
 <div class="container">
 
-<div class="header">
+    <div class="header">
 
-    <img
-        src="images/logo.png"
-        alt="Logo"
-        class="logo">
+        <img
+            src="images/logo.png"
+            alt="Logo"
+            class="logo">
 
-    <h1>HÓA THẦY TÚ</h1>
+        <h1>
+            HÓA THẦY TÚ
+        </h1>
 
-    <div class="phone">
-        Trang web đang hoàn thiện, hãy liên hệ với giáo viên qua Facebook hoặc số điện thoại 0962829679
+        <div class="phone">
+            0962829679
+        </div>
+
     </div>
 
+    <div class="card">
 
-</div>
+        <div class="form-group">
+
+            <label>
+                <strong>
+                    Chọn lớp *
+                </strong>
+            </label>
+
+            <select id="lopHoc">
+
+                <option value="">
+                    -- Chọn lớp --
+                </option>
+
+                <option value="6">
+                    Lớp 6
+                </option>    
+
+                <option value="7">
+                    Lớp 7
+                </option>    
+
+                <option value="8">
+                    Lớp 8
+                </option>    
+
+                <option value="9">
+                    Lớp 9
+                </option>
+
+                <option value="10">
+                    Lớp 10
+                </option>
+
+                <option value="11">
+                    Lớp 11
+                </option>
+
+                <option value="12">
+                    Lớp 12
+                </option>
+
+            </select>
+
+        </div>
+
+        <div
+            id="formSection"
+            style="display:none;">
+
+            <div class="form-group">
+
+                <label>
+                    <strong>
+                        Họ và tên *
+                    </strong>
+                </label>
+
+                <input
+                    type="text"
+                    id="hoTen"
+                    placeholder="Nhập họ và tên học sinh">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    <strong>
+                        Số điện thoại phụ huynh *
+                    </strong>
+                </label>
+
+                <input
+                    type="text"
+                    id="sdtPhuHuynh"
+                    placeholder="Ví dụ: 0123456789">
+
+            </div>
+
+            <div
+                class="form-group"
+                id="lienHeHocSinhGroup">
+
+                <label>
+                    <strong>
+                        Số điện thoại hoặc link FB của học sinh *
+                    </strong>
+                </label>
+
+                <input
+                    type="text"
+                    id="lienHeHocSinh"
+                    placeholder="SĐT hoặc link Facebook">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+                    <strong>
+                        Trường học sinh đang học *
+                    </strong>
+                </label>
+
+                <select id="truongHoc">
+                </select>
+
+            </div>
+
+            <div class="schedule-box">
+
+                <h2>
+                    Lịch học
+                </h2>
+
+                <img
+                    id="scheduleImage"
+                    src=""
+                    alt="Lịch học">
+
+            </div>
+
+            <div
+                id="groupSection"
+                style="display:none;">
+
+                <h2>
+                    Chọn nhóm học
+                    (có thể học chéo giữa các nhóm)
+                </h2>
+
+                <div id="groupTableContainer">
+                </div>
+
+            </div>
+
+        </div>
+
+        <button
+            id="submitBtn"
+            disabled>
+
+            Đăng ký
+
+        </button>
+
+        <div id="message">
+        </div>
+
+    </div>
 
 </div>
 
