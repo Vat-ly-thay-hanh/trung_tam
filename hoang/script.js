@@ -99,6 +99,12 @@ function buildForm() {
         loadSchools(THPT);
 
         scheduleImage.src = "images/lop10.jpg";
+
+        createGroupTable_2([
+            "10A",
+            "10B"
+        ]);
+        
     }
 
     if (lop === "11") {
@@ -109,7 +115,7 @@ function buildForm() {
 
         scheduleImage.src = "images/lop11.jpg";
 
-        createGroupTable([
+        createGroupTable_3([
             "11A",
             "11B"
         ]);
@@ -123,7 +129,7 @@ function buildForm() {
 
         scheduleImage.src = "images/lop12.jpg";
 
-        createGroupTable([
+        createGroupTable_3([
             "12A",
             "12B"
         ]);
@@ -149,7 +155,7 @@ function loadSchools(list) {
     });
 }
 
-function createGroupTable(groups) {
+function createGroupTable_3(groups) {
 
     groupSection.style.display = "block";
 
@@ -167,6 +173,59 @@ function createGroupTable(groups) {
     html += '</tr>';
 
     for (let i = 1; i <= 3; i++) {
+
+        html += '<tr>';
+
+        html += `<td><strong>Buổi ${i}</strong></td>`;
+
+        groups.forEach(group => {
+
+            html += `
+            <td>
+                <input
+                    type="radio"
+                    name="buoi${i}"
+                    value="${group}">
+            </td>
+            `;
+        });
+
+        html += '</tr>';
+    }
+
+    html += '</table>';
+
+    groupTableContainer.innerHTML = html;
+
+    document
+        .querySelectorAll('input[type="radio"]')
+        .forEach(radio => {
+
+            radio.addEventListener(
+                "change",
+                validateForm
+            );
+        });
+}
+
+function createGroupTable_2(groups) {
+
+    groupSection.style.display = "block";
+
+    let html = "";
+
+    html += '<table class="group-table">';
+
+    html += '<tr>';
+    html += '<th>Buổi</th>';
+
+    groups.forEach(group => {
+        html += `<th>${group}</th>`;
+    });
+
+    html += '</tr>';
+
+    for (let i = 1; i <= 2; i++) {
 
         html += '<tr>';
 
@@ -242,6 +301,22 @@ function validateForm() {
             lienHeHocSinh.value.trim() === ""
         ) {
             ok = false;
+        }
+    }
+
+    if (
+        lopHoc.value === "10"
+    ) {
+
+        for (let i = 1; i <= 2; i++) {
+
+            const selected =
+                document.querySelector(
+                    `input[name="buoi${i}"]:checked`
+                );
+
+            if (!selected)
+                ok = false;
         }
     }
 
