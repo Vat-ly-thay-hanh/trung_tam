@@ -1,4 +1,4 @@
-const WEB_APP_URL = "https://crimson-cake-1973.hanhborn.workers.dev/";
+const WEB_APP_URL = "https://white-wind-789b.hanhborn.workers.dev/";
 
 const lopHoc = document.getElementById("lopHoc");
 const formSection = document.getElementById("formSection");
