@@ -334,7 +334,7 @@ async function submitForm() {
                     color:#0f4c81;
                 ">
                     Hãy nhắn tin cho thầy Hạnh thông qua
-                    <b>FB: Đỗ Xuân Hạnh</b>
+                    <b>FB: https://www.facebook.com/share/18xpZ1fpH9/ </b>
                     <br><br>
                     hoặc zalo:
                     <b>0989739841</b>
