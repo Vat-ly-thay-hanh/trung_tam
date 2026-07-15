@@ -334,8 +334,16 @@ async function submitForm() {
                     color:#0f4c81;
                 ">
                     Hãy nhắn tin cho thầy Hạnh thông qua
-                    <b>FB: https://www.facebook.com/share/18xpZ1fpH9/ </b>
-                    <br><br>
+    <a
+        href="https://www.facebook.com/share/18xpZ1fpH9/"
+        target="_blank"
+        style="
+            color:#1877F2;
+            font-weight:bold;
+            text-decoration:underline;
+        ">
+        Facebook
+    </a>
                     hoặc zalo:
                     <b>0989739841</b>
                 </p>
