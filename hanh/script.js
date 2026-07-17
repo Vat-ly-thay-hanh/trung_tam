@@ -333,19 +333,17 @@ async function submitForm() {
                     line-height:1.8;
                     color:#0f4c81;
                 ">
-                    Hãy nhắn tin cho thầy Hạnh thông qua
-    <a
-        href="https://www.facebook.com/share/18xpZ1fpH9/"
-        target="_blank"
-        style="
-            color:#1877F2;
-            font-weight:bold;
-            text-decoration:underline;
-        ">
-        Facebook: ĐỖ XUÂN HẠNH
-    </a>
-                    hoặc zalo:
-                    <b>0989739841</b>
+                    <a
+                        href="https://www.facebook.com/share/18xpZ1fpH9/"
+                        target="_blank"
+                        style="
+                            color:#1877F2;
+                            font-weight:bold;
+                            text-decoration:underline;
+                        ">
+                        Bấm vào đây để nhắn tin cho thầy Hạnh
+                    </a>
+
                 </p>
             </div>
             `;
